@@ -1,7 +1,7 @@
 # Swift Algorithms
 
-코딩 테스트 문제 풀이를 기록하는 레포지토리입니다.
-XCTest로 테스트하기 위해 FrameWork로 
+코딩 테스트 문제 풀이를 기록하는 레포지토리입니다. </br>
+XCTest로 테스트하기 위해 FrameWork로 설정되어있습니다.
 
 ## 프로젝트 구조
 
