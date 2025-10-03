@@ -26,15 +26,26 @@ func cursedNum3(_ n: Int) -> Int {
 //
 //    return answer
     
+//    var answer = 0
+//    var i = 0
+//    
+//    while answer < n {
+//        i += 1
+//        if i % 3 != 0 && !i.description.contains("3") {
+//            answer += 1
+//        }
+//    }
+//    
+//    return i
+    
     var answer = 0
-    var i = 0
+
+       for i in 1...n {
+           answer += 1
+           while answer % 3 == 0 || String(answer).contains("3") {
+               answer += 1
+           }
+       }
+       return answer
     
-    while answer < n {
-        i += 1
-        if i % 3 != 0 && !i.description.contains("3") {
-            answer += 1
-        }
-    }
-    
-    return i
 }
