@@ -1,5 +1,5 @@
 //
-//  CursedNum3Tests.swift
+//  HateSameNumberTests.swift
 //  AlgorithmsTests
 //
 //  Created by 정근호 on 7/24/25.
@@ -8,13 +8,12 @@
 import XCTest
 @testable import Algorithms
 
-final class CursedNum3Tests: XCTestCase {
+final class HateSameNumberTests: XCTestCase {
     func test() {
-        let n = 15
-        let answer = 25
+        let arr = [1,1,3,3,0,1,1]
+        let answer = [1,3,0,1]
         
-        let result = cursedNum3(n)
+        let result = hateSameNumber(arr)
         XCTAssertEqual(result, answer)
     }
 }
-
