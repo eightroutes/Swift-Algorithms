@@ -8,7 +8,7 @@
 import XCTest
 @testable import Algorithms
 
-final class personalInfoValidTests: XCTestCase {
+final class PersonalInfoValidTests: XCTestCase {
     func test() {
         let today = "2022.05.19"
         let terms = ["A 6", "B 12", "C 3"]

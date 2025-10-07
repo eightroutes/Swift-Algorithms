@@ -3,7 +3,7 @@
 //  Algorithms
 //
 //  Created by 정근호 on 10/3/25.
-//
+// https://school.programmers.co.kr/learn/courses/30/lessons/150370#
 
 import Foundation
 
@@ -21,12 +21,20 @@ func personalInfoValid(_ today:String, _ terms:[String], _ privacies:[String]) -
 //        let termParts = $0.split(separator: " ")
 //        return (termParts[0], Int(termParts[1])!)
 //    })
-    let durationDict = terms.reduce(into: [String: Int]()) { dict, term in
-        let parts = term.components(separatedBy: " ")
-        dict[String(parts[0])] = Int(parts[1])!
+    
+//    let durationDict = terms.reduce(into: [String: Int]()) { dict, term in
+//        let parts = term.components(separatedBy: " ")
+//        dict[String(parts[0])] = Int(parts[1])!
+//    }
+    
+    // reduce(into:) - 첫번째 값: inout으로 변경되는 원본, 두번째 값: 추가되는 값
+    // into: initalValue(초기값) -> 초기값으로 [String:Int]() - 빈 딕셔너리 생성
+    let durationDict = terms.reduce(into: [String:Int]()) {
+        let parts = $1.components(separatedBy: " ")
+        $0[parts[0]] = Int(parts[1])!
     }
     print(durationDict)
-    
+
     let convertedPrivacies =
     privacies.map { privacy -> ([Int], Int) in
         let pvParts = privacy.components(separatedBy: " ")
