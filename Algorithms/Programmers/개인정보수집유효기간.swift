@@ -23,7 +23,7 @@ func personalInfoValid(_ today:String, _ terms:[String], _ privacies:[String]) -
 //    })
     let durationDict = terms.reduce(into: [String: Int]()) { dict, term in
         let parts = term.components(separatedBy: " ")
-        return dict[String(parts[0])] = Int(parts[1])!
+        dict[String(parts[0])] = Int(parts[1])!
     }
     print(durationDict)
     
