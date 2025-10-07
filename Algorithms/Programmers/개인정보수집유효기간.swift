@@ -28,8 +28,8 @@ func personalInfoValid(_ today:String, _ terms:[String], _ privacies:[String]) -
     print(durationDict)
     
     let convertedPrivacies =
-    privacies.map {
-        let pvParts = $0.components(separatedBy: " ")
+    privacies.map { privacy -> ([Int], Int) in
+        let pvParts = privacy.components(separatedBy: " ")
         let ymdPV = pvParts[0].components(separatedBy: ".").map { Int($0)! }
         let duration = durationDict[pvParts[1]]!
         return (ymdPV, duration)
@@ -37,9 +37,9 @@ func personalInfoValid(_ today:String, _ terms:[String], _ privacies:[String]) -
     print(convertedPrivacies)
     
     let calculatedPrivacies =
-    convertedPrivacies.map {
-        var newYear = $0.0[0]
-        var newMonth = $0.0[1] + $0.1
+    convertedPrivacies.map { privacy -> (Int, Int, Int) in
+        var newYear = privacy.0[0]
+        var newMonth = privacy.0[1] + privacy.1
         if newMonth > 12 {
             newYear += newMonth / 12
             newMonth = newMonth % 12
@@ -48,7 +48,7 @@ func personalInfoValid(_ today:String, _ terms:[String], _ privacies:[String]) -
                 newYear -= 1
             }
         }
-        return (newYear, newMonth, $0.0[2])
+        return (newYear, newMonth, privacy.0[2])
     }
     print(calculatedPrivacies)
     
