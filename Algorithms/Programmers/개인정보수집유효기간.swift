@@ -42,7 +42,11 @@ func personalInfoValid(_ today:String, _ terms:[String], _ privacies:[String]) -
         var newMonth = $0.0[1] + $0.1
         if newMonth > 12 {
             newYear += newMonth / 12
-            newMonth += newMonth % 12
+            newMonth = newMonth % 12
+            if newMonth == 0 {
+                newMonth = 12
+                newYear -= 1
+            }
         }
         return (newYear, newMonth, $0.0[2])
     }
