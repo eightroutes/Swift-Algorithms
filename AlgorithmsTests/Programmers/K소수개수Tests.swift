@@ -16,7 +16,9 @@ final class kPrimeCountTests: XCTestCase {
         let result = 3
         
         let answer = kPrimeCount(n, k)
+        let answer1 = kPrimeCount(110011, 10)
         XCTAssertEqual(result, answer)
+        XCTAssertEqual(2, answer1)
     }
 }
 
