@@ -20,15 +20,6 @@ func reportResult(_ id_list:[String], _ report:[String], _ k:Int) -> [Int] {
     // k: 2
     
     var reportedDict = [String:Set<String>]()
-    var countDict = [String:Int]()
-    var suspended = [String]()
-    var userDict = [String:Int]()
-    
-    for id in id_list {
-        countDict[id] = 0
-    }
-    print(countDict)
-    
     for r in report {
         let parts = r.components(separatedBy: " ")
 //            if id == name[0] {
@@ -44,21 +35,28 @@ func reportResult(_ id_list:[String], _ report:[String], _ k:Int) -> [Int] {
         // Array - append
         // Set - insert
     }
-    print("신고현황: ", reportedDict)
+    print("reportedDict:", reportedDict)
     
+    var countDict = [String:Int]()
+    for id in id_list {
+        countDict[id] = 0
+    }
     for reported in reportedDict.values {
         reported.forEach {
             countDict[$0]! += 1
         }
     }
-    print(countDict)
+    print("countDict:", countDict)
     
+    var suspended = [String]()
     for dict in countDict {
         if dict.value >= k {
             suspended.append(dict.key)
         }
     }
+    print("suspended:", suspended)
     
+    var userDict = [String:Int]()
     for dict in reportedDict {
         for s in suspended {
             if dict.value.contains(s) {
@@ -66,13 +64,13 @@ func reportResult(_ id_list:[String], _ report:[String], _ k:Int) -> [Int] {
             }
         }
     }
-    print(userDict)
+    print("userDict:", userDict)
     
     var answer = [Int]()
-    
     for id in id_list {
         answer.append(userDict[id, default: 0])
     }
+    print("answer:", answer)
     
     return answer
 }
