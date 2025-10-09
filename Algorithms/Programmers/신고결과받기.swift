@@ -7,32 +7,72 @@
 
 import Foundation
 
-func solution(_ id_list:[String], _ report:[String], _ k:Int) -> [Int] {
+func reportResult(_ id_list:[String], _ report:[String], _ k:Int) -> [Int] {
     
     // [String:[String]]에 유저id:[신고한id] 저장
     // [String:Int]에 유저id:신고당한횟수 저장
     // 여기서 Int가 >= k 인값 저장 [frodo, neo]
     // [String:[String]]에서 저장된 값[frodo,neo]들의 개수가 담긴 리스트가 정답
     
-    var dict = [String:[String]]()
-    var reportsCount = [String:Int]()
-    var bannedId = [String]()
-    var result = [Int]()
     
+    // id_list: ["muzi", "frodo", "apeach", "neo"]
+    // report: ["muzi frodo","apeach frodo","frodo neo","muzi neo","apeach muzi"]
+    // k: 2
+    
+    var reportedDict = [String:Set<String>]()
+    var countDict = [String:Int]()
+    var suspended = [String]()
+    var userDict = [String:Int]()
     
     for id in id_list {
-        for r in report {
-            let key = r.split(separator: " ")[0]
-            let value = r.split(separator: " ")[1]
-            print(key, value)
-            if id == key {
-                dict[id] = [String(value)]
-            }
-            print(dict)
+        countDict[id] = 0
+    }
+    print(countDict)
+    
+    for r in report {
+        let parts = r.components(separatedBy: " ")
+//            if id == name[0] {
+//                if reportedDict[id] != nil {
+//                    reportedDict[id]!.append(name[1])
+//                } else {
+//                    reportedDict[id] = [name[1]]
+//                }
+//            }
+        let reporter = parts[0]
+        let reported = parts[1]
+        reportedDict[reporter, default: []].insert(reported)
+        // Array - append
+        // Set - insert
+    }
+    print("신고현황: ", reportedDict)
+    
+    for reported in reportedDict.values {
+        reported.forEach {
+            countDict[$0]! += 1
+        }
+    }
+    print(countDict)
+    
+    for dict in countDict {
+        if dict.value >= k {
+            suspended.append(dict.key)
         }
     }
     
-    print(dict)
+    for dict in reportedDict {
+        for s in suspended {
+            if dict.value.contains(s) {
+                userDict[dict.key, default: 0] += 1
+            }
+        }
+    }
+    print(userDict)
     
-    return []
+    var answer = [Int]()
+    
+    for id in id_list {
+        answer.append(userDict[id, default: 0])
+    }
+    
+    return answer
 }
